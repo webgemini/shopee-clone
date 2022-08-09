@@ -1,456 +1,320 @@
-// // When the user scroll down on the Tablet, Mobile, Search history will the hide.
-// if (document.getElementById('home-page-header-search-history')) {
-//   var searchScrollHideDown = document.getElementById('home-page-header-search-history');
-//   window.onscroll = function() {hideSearchHistory()};
-//   function hideSearchHistory() {
-//     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-//       searchScrollHideDown.style.display = 'none';
-//     } else {
-//       searchScrollHideDown.style.display = 'block';
-//     }
-//   }
-// }
+function handleOverlay(overlayEle, pageBody) {
+  this.overlayElement = overlayEle;
+  this.pageBodyEle = pageBody;
+  this.overlayDisplay = () => {
+    this.overlayElement.classList.add('js-overlay--active');
+  };
+  this.overlayHidden = () => {
+    this.overlayElement.classList.remove('js-overlay--active');
+  };
+  this.addNoScroll = () => {
+    this.pageBodyEle.classList.add('stardust-no-scroll');
+  };
+  this.removeNoScroll = () => {
+    this.pageBodyEle.classList.remove('stardust-no-scroll');
+  };
+}
 
-if (document.getElementById('scroll-to-top')) {
-  var buttonUpTop = document.getElementById('scroll-to-top');
+function handleStardust() {
+  var stardustActiveName;
+  var stardustActive;
+  var overlayEle = document.querySelector('.js-overlay');
+  var pageBody = document.querySelector('.js-function');
+  var modalAuth = document.querySelector('.modal');
+  var modalAuthContainer = modalAuth.querySelector('.modal__container');
+  const handleOverlayObj = new handleOverlay(overlayEle, pageBody);
+
+  var stardustBtnEles = document.querySelectorAll('.stardust-btn--active');
+
+  if (overlayEle) {
+      overlayEle.onclick = stardustHidden();
+  } else {
+    console.log('Error: Overlay element not found, ', overlayEle);
+  }
+
+  if (stardustBtnEles.length > 0) {
+    stardustBtnEles.forEach((stardustBtnEle) => {
+      stardustBtnEle.onclick = stardustDisplay(stardustBtnEle);
+    });
+  } else {
+    console.log('Error: Stardust Btn element not found, ', stardustBtnEles);
+  }
+
+  function stardustDisplay(stardustBtnEle) {
+    var stardustName = stardustBtnEle.getAttribute('data-stardust');
+    var stardustSetActive = document.querySelector('.stardust-' + stardustName + '__container');
+    return () => {
+      if (stardustSetActive) {
+        if (stardustActive) {
+          stardustActive.classList.remove('stardust-' + stardustActiveName + '__container--active');
+        }
+        stardustSetActive.classList.add('stardust-' + stardustName + '__container--active');
+        stardustActiveName = stardustName;
+        stardustActive = stardustSetActive;
+      }
+      handleOverlayObj.overlayDisplay();
+      handleOverlayObj.addNoScroll();
+    }
+  }
+  function stardustHidden() {
+    return () => {
+      if (stardustActive) {
+        stardustActive.classList.remove('stardust-' + stardustActiveName + '__container--active');
+      }
+      handleOverlayObj.overlayHidden();
+      handleOverlayObj.removeNoScroll();
+      stardustActiveName = undefined;
+      stardustActive = undefined;
+    }
+  }
+  if (modalAuth) {
+    modalAuth.onclick = stardustHidden();
+    modalAuthContainer.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+}
+
+function handleModalFormAuth() {
+  var formAuthActive = document.querySelector('.auth-form--active');
+  var formAuthSwitchBtns = document.querySelectorAll('.auth-form__switch-btn');
+
+  formAuthSwitchBtns.forEach((formAuthSwitchBtn) => {
+    formAuthSwitchBtn.onclick = formAuthDisplay(formAuthSwitchBtn);
+  });
+
+  function formAuthDisplay(formAuthSwitchBtn) {
+    return () => {
+      var formAuthName = formAuthSwitchBtn.getAttribute('data-form');
+      if (formAuthName) {
+        var formAuthSetActive = document.querySelector('.auth-form__' + formAuthName);
+        if (formAuthSetActive) {
+          formAuthHidden();
+        }
+        formAuthSetActive.classList.add('auth-form--active');
+        formAuthActive = formAuthSetActive;
+      }
+    }
+  }
+
+  function formAuthHidden() {
+    formAuthActive.classList.remove('auth-form--active');
+  }
+}
+
+function handleProductImgShows(productBriefShow) {
+  var imgProductBrief = document.querySelector(productBriefShow);
+  var imgProductBriefList = document.querySelectorAll('.product-brief__showimg-list .product-brief__showimg-item-group');
+
+  imgProductBrief.innerHTML = imgProductBriefList[0].outerHTML;
+  imgProductBriefList.forEach((imgElement, i) => {
+    imgElement.onpointerover = () => {
+      imgProductBrief.innerHTML = imgProductBriefList[i].outerHTML;
+    };
+  });
+}
+
+function handleScrollingDown(eleSelected, destinationScroll) {
+  var selectElements = document.querySelectorAll(eleSelected);
+  var destinationScroll = document.querySelector(destinationScroll);
+  for (let selectElement of selectElements) {
+    selectElement.onclick = () => {
+      destinationScroll.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }
+}
+
+function handleBackDirection() {
+  var btnDirection = document.querySelector('.header-back .header-back-link');
+  if (btnDirection) {
+    btnDirection.onclick = () => {
+      window.history.back();
+    };
+  }
+}
+
+function handleScrollUpTop(scrollToTop) {
+  let buttonUpTop = document.getElementById(scrollToTop);
   // When the user scrolls down 600px from the top of the document, show button.
-  window.onscroll = function() {scrollToTop()};
-  function scrollToTop() {
+  document.onscroll = () => {
     if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
       buttonUpTop.style.display = 'block';
     } else {
       buttonUpTop.style.display = 'none';
     }
-  }
+  };
   // When the user click on the button, scroll to the top of the document
-  function upToTop() {
+  buttonUpTop.onclick = () => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
 }
 
-// Search Filter Tablet & Mobile
-const filterBtn = document.querySelector('.navbar-search__filter');
-const filterSearch = document.querySelector('.stardust-drawer__container');
-const overlayFilter = document.querySelector('.stardust-drawer__background');
-const stardustNoScroll = document.querySelector('.js-function');
-const selectedFilterItems = document.querySelectorAll('.filter-drawer-section__item-inner');
-const selectedActivated = document.querySelector('.filter-drawer-section__item-inner--selected');
-const btnResetAllSelected = document.querySelector('.filter-drawer--btn');
-const checkFilterItem = `
-<span class="filter-icon-container">
-  <i class="shop-icon filter-icon-container__icon fa fa-check" aria-hidden="true"></i>
-</span>`;
+function handleProductQuantity(btnActionUpDown, calculatorProductQuantity) {
+  var btnUpDownValue = document.querySelectorAll(btnActionUpDown);
+  var resultInput = document.querySelector(calculatorProductQuantity);
+  var totalQuantityProduct = resultInput.parentElement.parentElement.lastElementChild.innerText;
+  var createANewEle = document.createElement('div');
 
-if (filterBtn) {
-  function showModalFilter() {
-    filterSearch.classList.add('stardust-drawer__container--active');
-    overlayFilter.classList.add('stardust-drawer__background--active');
-    stardustNoScroll.classList.add('stardust-no-scroll');
-  }
-
-  filterBtn.addEventListener('click', showModalFilter);
-
-  function hideModalFilter() {
-    filterSearch.classList.remove('stardust-drawer__container--active');
-    setTimeout(function() {
-      overlayFilter.classList.remove('stardust-drawer__background--active');
-    }, 500);
-    stardustNoScroll.classList.remove('stardust-no-scroll');
-    $('.filter-icon-container').remove();
-    for (const selectedFilterItemClear of selectedFilterItems) {
-      selectedFilterItemClear.classList.remove('filter-drawer-section__item-inner--selected');
-    }
-  }
-  overlayFilter.addEventListener('click', hideModalFilter);
-  // Ngăn hành vi nổi bọt
-  overlayFilter.addEventListener('click', function (event) {
-    event.stopPropagation();
-  });
-
-  function resetAllSelected() {
-    $('.filter-icon-container').remove();
-    for (const selectedFilterItemClear of selectedFilterItems) {
-      selectedFilterItemClear.classList.remove('filter-drawer-section__item-inner--selected');
+  function createANewElement() {
+    if (resultInput.value > parseInt(totalQuantityProduct)) {
+      resultInput.value = parseInt(totalQuantityProduct);
+      createANewEle.innerHTML = `<div class="notice-quantity-up-and-down">Số lượng bạn chọn đã đạt mức tối đa của sản phẩm này</div>`;
+      resultInput.parentElement.parentElement.parentElement.parentElement.appendChild(createANewEle);
     }
   }
 
-  btnResetAllSelected.addEventListener('click', resetAllSelected);
+  function setAttributeValueInput() {
+    resultInput.setAttribute('value', resultInput.value);
+    resultInput.setAttribute('aria-valuenow', resultInput.value);
+  }
+
+  btnUpDownValue[1].onclick = () => {
+    resultInput.value++;
+    createANewElement();
+    setAttributeValueInput();
+  };
+
+  btnUpDownValue[0].onclick = () => {
+    if (resultInput.value > 1) {
+      resultInput.value--;
+      setAttributeValueInput();
+    } else if (resultInput.value < 1) {
+      resultInput.value = 1;
+    }
+    if (resultInput.parentElement.parentElement.parentElement.parentElement.querySelector('.notice-quantity-up-and-down')) {
+      resultInput.parentElement.parentElement.parentElement.parentElement.removeChild(createANewEle);
+    }
+  };
+
+  resultInput.oninput = () => {
+    createANewElement();
+    setAttributeValueInput();
+    if (resultInput.parentElement.parentElement.parentElement.parentElement.querySelector('.notice-quantity-up-and-down')) {
+      resultInput.parentElement.parentElement.parentElement.parentElement.removeChild(createANewEle);
+    }
+  }
 }
 
-if (filterSearch) {
-  for (const selectedFilterItem of selectedFilterItems) {
-    if (selectedFilterItem) {
-      function selectedItemActive() {
-        $(selectedFilterItem).append(checkFilterItem);
-        selectedFilterItem.classList.add('filter-drawer-section__item-inner--selected');
-      }
-      selectedFilterItem.addEventListener('click', selectedItemActive);
-    }
-  }
-
-  if (selectedActivated) {
-    for (const selectedActivatedClear of selectedFilterItems) {
-      if (selectedActivatedClear) {
-        function hideSelectedItemActive() {
-          selectedActivatedClear.classList.remove('filter-drawer-section__item-inner--selected');
-          if ($('.filter-icon-container')) {
-            $('.filter-icon-container').remove();
-          }
-        }
-        selectedActivatedClear.addEventListener('click', hideSelectedItemActive);
-      }
-    }
-  }
-
-}
-
-const stardustTarget = document.querySelector('.stardust-popover__target');
-const stardustContainer = document.querySelector('.stardust-popover__container');
-
-if (stardustTarget) {
-  function showStardust() {
-    stardustContainer.classList.add('stardust-popover__container--show');
-    overlayFilter.classList.add('stardust-popover__background--active');
-    stardustNoScroll.classList.add('stardust-no-scroll');
-  }
-
-  stardustTarget.addEventListener('click', showStardust);
-  function hideStardust() {
-    stardustContainer.classList.remove('stardust-popover__container--show');
-    overlayFilter.classList.remove('stardust-popover__background--active');
-    stardustNoScroll.classList.remove('stardust-no-scroll');
-  }
-  overlayFilter.addEventListener('click', hideStardust);
-}
-
-
-/* BEGIN: Slider */
-// Set Size Image
-const sizeImage = 100;
-// Set Time
-const timeSlider = 5000;
-const sliderIdHome = "#slider";
-const sliderIdShopMail = "#slider-shop-mail";
-const sliderIdCatePage = "#slider-cate-page";
-
-if (sliderIdHome) {
-  // Determine the total amount of images in the carousel.
-  let sliderCount = $(sliderIdHome).find(".slider-img .head-slider-list__item .head-slider-list__item-container .head-slider__item-link .head-slider__item-img").length;
-  // Load images into the carousel
-  let sliderImg = $(sliderIdHome).find(".slider-img");
-  // Define the navigation arrows and pagination bullets.
+function handleSlideShow(nameSlideShow, imgId, autoPlay) {
+  this.currentIndex = 0;
+  this.sliderShowEle = document.querySelector(nameSlideShow);
   let sliderArrow =
-  `<div class="slider-arrow arrow-left" role="button"><i class="fas fa-chevron-left"></i></div><div class="slider-arrow arrow-right" role="button"><i class="fas fa-chevron-right"></i></div>`;
-  let sliderDotLi = "";
-  for (let i = 0; i < sliderCount; i++) {
-    sliderDotLi += `<li></li>`;
-  }
-  let sliderDot = `<ul class="slider-dot">${sliderDotLi}</ul>`;
-  $(sliderIdHome).append(sliderArrow + sliderDot);
+   `<div class="slider-arrow arrow-left" role="button"><i class="fas fa-chevron-left"></i></div><div class="slider-arrow arrow-right" role="button"><i class="fas fa-chevron-right"></i></div>`;
 
-  let activeDefaultCount = $(".slider-dot li.active").length;
-  if (activeDefaultCount != 1) {
-    $(".slider-dot li")
-      .removeClass()
-      .eq(0)
-      .addClass("active");
+  this.autoPlay = autoPlay;
+  this.listImgItems = this.sliderShowEle.querySelectorAll(`.slider-img .slider-img-${imgId}`);
+  this.sliderImg = this.sliderShowEle.querySelector('.slider-img');
+  this.sliderAction = this.sliderShowEle.querySelector('.slider-actions');
+  this.sliderCount = this.listImgItems.length;
+  this.sliderDotLi = '';
+  for (let i = 0; i < this.sliderCount; i++) {
+    this.sliderDotLi += `<li data-index="${i}"></li>`;
   }
-  let sliderIndex = $(".slider-dot li.active").index();
-  sliderImg.css("left", -sliderIndex * sizeImage + "%");
-
-  // Main Switch between images
-  function sliderPos() {
-      sliderImg.css("left", -sliderIndex * sizeImage + "%");
-      $(".slider-dot li")
-        .removeClass()
-        .eq(sliderIndex)
-        .addClass("active");
+  this.sliderDot = `<ul class="slider-dot">${this.sliderDotLi}</ul>`;
+  this.sliderAction.outerHTML = sliderArrow + this.sliderDot;
+  this.sliderRightEl = this.sliderShowEle.querySelector('.arrow-right');
+  this.sliderLeftEl = this.sliderShowEle.querySelector('.arrow-left');
+  this.sliderDotEl = this.sliderShowEle.querySelectorAll('.slider-dot li');
+  if (this.sliderDotEl.length != 1) {
+    this.sliderDotEl[0].classList.add('active');
+  }
+  this.sliderPos = () => {
+    for (let dotItem of this.sliderDotEl) {
+      dotItem.classList.remove('active');
     }
-
-    $(".arrow-right").click(function() {
-      sliderIndex >= sliderCount - 1 ? (sliderIndex = 0) : sliderIndex++;
-      sliderPos();
-    });
-
-    $(".arrow-left").click(function() {
-      sliderIndex <= 0 ? (sliderIndex = sliderCount - 1) : sliderIndex--;
-      sliderPos();
-    });
-
-    $(".slider-dot li").click(function() {
-      sliderIndex = $(this).index();
-      sliderPos();
-    });
-
-    let goSlider = setInterval(() => {
-      $(".arrow-right").click();
-    }, timeSlider);
-
-    $(sliderIdHome).on({
-      mouseenter: () => {
-        clearInterval(goSlider);
-      },
-      mouseleave: () => {
-        goSlider = setInterval(() => {
-          $(".arrow-right").click();
-        }, timeSlider);
-      }
-    });
-} else {
-  console.log("Error! Slider inactive");
-}
-
-if (sliderIdShopMail) {
-  // Determine the total amount of images in the carousel.
-  let sliderCount = $(sliderIdShopMail).find(".slider-img .head-slider-list__item .head-slider__item-link .head-slider__item-img--shopmall").length;
-  // Load images into the carousel
-  let sliderImg = $(sliderIdShopMail).find(".slider-img");
-  // Define the navigation arrows and pagination bullets.
-  let sliderArrow =
-  `<div class="slider-arrow arrow-left-2" role="button"><i class="fas fa-chevron-left"></i></div><div class="slider-arrow arrow-right-2" role="button"><i class="fas fa-chevron-right"></i></div>`;
-  let sliderDotLi = "";
-  for (let i = 0; i < sliderCount; i++) {
-    sliderDotLi += `<li></li>`;
+    this.sliderDotEl[this.currentIndex].classList.add('active');
+    this.sliderImg.style.left = -this.currentIndex * 100 + '%';
   }
-  let sliderDot = `<ul class="slider-dot-2">${sliderDotLi}</ul>`;
-  $(sliderIdShopMail).append(sliderArrow + sliderDot);
-
-  let activeDefaultCount = $(".slider-dot-2 li.active").length;
-  if (activeDefaultCount != 1) {
-    $(".slider-dot-2 li")
-      .removeClass()
-      .eq(0)
-      .addClass("active");
-  }
-  let sliderIndex = $(".slider-dot-2 li.active").index();
-  sliderImg.css("left", -sliderIndex * sizeImage + "%");
-
-  // Main Switch between images
-  function sliderPos() {
-      sliderImg.css("left", -sliderIndex * sizeImage + "%");
-      $(".slider-dot-2 li")
-        .removeClass()
-        .eq(sliderIndex)
-        .addClass("active");
+  this.next = () => {
+    this.currentIndex >= this.sliderCount - 1 ? (this.currentIndex = 0) : this.currentIndex++;
+    this.sliderPos();
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.auto();
     }
-
-    $(".arrow-right-2").click(function() {
-      sliderIndex >= sliderCount - 1 ? (sliderIndex = 0) : sliderIndex++;
-      sliderPos();
-    });
-
-    $(".arrow-left-2").click(function() {
-      sliderIndex <= 0 ? (sliderIndex = sliderCount - 1) : sliderIndex--;
-      sliderPos();
-    });
-
-    $(".slider-dot-2 li").click(function() {
-      sliderIndex = $(this).index();
-      sliderPos();
-    });
-
-    let goSlider = setInterval(() => {
-      $(".arrow-right-2").click();
-    }, timeSlider);
-
-    $(sliderIdShopMail).on({
-      mouseenter: () => {
-        clearInterval(goSlider);
-      },
-      mouseleave: () => {
-        goSlider = setInterval(() => {
-          $(".arrow-right-2").click();
-        }, timeSlider);
-      }
-    });
-} else {
-  console.log("Error! Slider inactive");
-}
-
-if (sliderIdCatePage) {
-  // Determine the total amount of images in the carousel.
-  let sliderCount = $(sliderIdCatePage).find(".slider-img .head-slider-list__item .head-slider__item-link .head-slider__item-img").length;
-  // Load images into the carousel
-  let sliderImg = $(sliderIdCatePage).find(".slider-img");
-  // Define the navigation arrows and pagination bullets.
-  let sliderArrow =
-  `<div class="slider-arrow arrow-left" role="button"><i class="fas fa-chevron-left"></i></div><div class="slider-arrow arrow-right" role="button"><i class="fas fa-chevron-right"></i></div>`;
-  let sliderDotLi = "";
-  for (let i = 0; i < sliderCount; i++) {
-    sliderDotLi += `<li></li>`;
-  }
-  let sliderDot = `<ul class="slider-dot">${sliderDotLi}</ul>`;
-  $(sliderIdCatePage).append(sliderArrow + sliderDot);
-
-  let activeDefaultCount = $(".slider-dot li.active").length;
-  if (activeDefaultCount != 1) {
-    $(".slider-dot li")
-      .removeClass()
-      .eq(0)
-      .addClass("active");
-  }
-  let sliderIndex = $(".slider-dot li.active").index();
-  sliderImg.css("left", -sliderIndex * sizeImage + "%");
-
-  // Main Switch between images
-  function sliderPos() {
-      sliderImg.css("left", -sliderIndex * sizeImage + "%");
-      $(".slider-dot li")
-        .removeClass()
-        .eq(sliderIndex)
-        .addClass("active");
+  };
+  this.prev = () => {
+    this.currentIndex <= 0 ? (this.currentIndex = this.sliderCount - 1) : this.currentIndex--;
+    this.sliderPos();
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.auto();
     }
-
-    $(".arrow-right").click(function() {
-      sliderIndex >= sliderCount - 1 ? (sliderIndex = 0) : sliderIndex++;
-      sliderPos();
-    });
-
-    $(".arrow-left").click(function() {
-      sliderIndex <= 0 ? (sliderIndex = sliderCount - 1) : sliderIndex--;
-      sliderPos();
-    });
-
-    $(".slider-dot li").click(function() {
-      sliderIndex = $(this).index();
-      sliderPos();
-    });
-
-    let goSlider = setInterval(() => {
-      $(".arrow-right").click();
-    }, timeSlider);
-
-    $(sliderIdCatePage).on({
-      mouseenter: () => {
-        clearInterval(goSlider);
-      },
-      mouseleave: () => {
-        goSlider = setInterval(() => {
-          $(".arrow-right").click();
-        }, timeSlider);
-      }
-    });
-} else {
-  console.log("Error! Slider inactive");
-}
-/* END: Slider */
-
-/*
-* BEGIN: Click scroll
-*/
-const transCss = "transform";
-const transValue = "translate(0rem, 0rem)";
-const visibilityCss = "visibility";
-const hiddenCss = "hidden";
-const visibleCss = "visible";
-
-const scrollLeft = " .carousel-arrow__left";
-const scrollRight = " .carousel-arrow__right";
-const actionScroll = " .image-carousel__list";
-const cateSection = ".home-cate__section-content";
-const flashSaleSection = ".flash-sale-section";
-const shopMallSection = ".shop-mall-section";
-const topSearch = ".top-search-section";
-
-const leftCount = scrollLeft.length;
-const rightCount = scrollRight.length;
-
-$(document).ready(function() {
-  // Click scroll category
-  if (cateSection){
-      const transCssCate = "translate(-30%, 0rem)";
-
-      $(cateSection + scrollLeft).click(function() {
-        $(cateSection + actionScroll).addClass('image-carousel__list--left');
-        $(cateSection + actionScroll).removeClass('image-carousel__list--right');
-        $(cateSection + scrollLeft).css(visibilityCss , hiddenCss);
-        $(cateSection + scrollRight).css(visibilityCss , visibleCss);
-      });
-
-      $(cateSection + scrollRight).click(function() {
-        $(cateSection + actionScroll).addClass('image-carousel__list--right');
-        $(cateSection + actionScroll).removeClass('image-carousel__list--left');
-        $(cateSection + scrollRight).css(visibilityCss , hiddenCss);
-        $(cateSection + scrollLeft).css(visibilityCss , visibleCss);
-      })
   }
-  // Click scroll Flash sale
-  if (flashSaleSection) {
-    const transCss100 = "translate(-100rem, 0rem)";
-    const transCss200 = "translate(-200rem, 0rem)";
 
-    $(flashSaleSection + scrollLeft).click(function() {
-        $(flashSaleSection + actionScroll).css(transCss , transValue);
-        $(flashSaleSection + scrollLeft).css(visibilityCss , hiddenCss);
-        $(flashSaleSection + scrollRight).css(visibilityCss , visibleCss);
-    });
-
-    $(flashSaleSection + scrollRight).click(function() {
-        if(rightCount) {
-          $(flashSaleSection + actionScroll).css(transCss , transCss100);
-        } else if (rightCount === 23) {
-          $(flashSaleSection + actionScroll).css(transCss , transCss200);
+  this.dot = () => {
+    for (let itemDot of this.sliderDotEl) {
+      itemDot.onclick = (e) => {
+        this.currentIndex = e.target.getAttribute('data-index');
+        this.sliderPos();
+        if (this.timer) {
+          clearInterval(this.timer);
+          this.auto();
         }
+      };
+    };
+  };
+  this.auto = () => {
+    this.timer = setInterval(() => {
+      this.next();
+    }, 5000);
+  };
+  this.run = () => {
+    if (this.sliderRightEl) {
+      this.sliderRightEl.onclick = this.next;
+    }
+    if (this.sliderLeftEl) {
+      this.sliderLeftEl.onclick = this.prev;
+    }
+    this.dot();
+    if (this.autoPlay) {
+      this.auto();
+    }
+  };
+}
 
-        $(flashSaleSection + scrollRight).css(visibilityCss , hiddenCss);
-        $(flashSaleSection + scrollLeft).css(visibilityCss , visibleCss);
-    });
-  }
-  // Click scroll Shop mall
-  if (shopMallSection){
-    const transCss80 = "translate(-50%, 0%)";
+function main() {
+  const slideShowMain = new handleSlideShow('#slider', 1, true);
+  const slideShowMain2 = new handleSlideShow('#slider-shop-mail', 2, true);
+  slideShowMain.run();
+  slideShowMain2.run();
+  handleScrollUpTop('scroll-to-top');
+  handleModalFormAuth();
+  handleStardust();
+};
 
-    $(shopMallSection + scrollLeft).click(function() {
-      $(shopMallSection + actionScroll).css(transCss , transValue);
-      $(shopMallSection + scrollLeft).css(visibilityCss , hiddenCss);
-      $(shopMallSection + scrollRight).css(visibilityCss , visibleCss);
-    });
+function pageCateProduct() {
+  const slideShowMain3 = new handleSlideShow('#slider-cate-page', 3, true);
+  slideShowMain3.run();
+  handleStardust();
+  handleScrollUpTop('scroll-to-top');
+  handleBackDirection();
+  handleModalFormAuth();
+};
 
-    $(shopMallSection + scrollRight).click(function() {
-      $(shopMallSection + actionScroll).css(transCss, transCss80);
-      $(shopMallSection + scrollRight).css(visibilityCss , hiddenCss);
-      $(shopMallSection + scrollLeft).css(visibilityCss , visibleCss);
-    });
-  }
-  // Click scroll Top Search
-  if (topSearch) {
-    const transCss100 = "translate(-100rem, 0rem)";
-    const transCss200 = "translate(-200rem, 0rem)";
+function pageProduct() {
+  handleProductImgShows('.product-brief__showimg-primary');
+  handleProductQuantity('.quantity-up-and-down__btn', '.quantity-up-and-down__input');
+  handleScrollingDown('.product-brief__info-rating', '.product-ratings');
+  handleStardust();
+  handleScrollUpTop('scroll-to-top');
+  handleBackDirection();
+  handleModalFormAuth();
+};
 
-    $(topSearch + scrollLeft).click(function() {
-        $(topSearch + actionScroll).css(transCss , transValue);
-        $(topSearch + scrollLeft).css(visibilityCss , hiddenCss);
-        $(topSearch + scrollRight).css(visibilityCss , visibleCss);
-    });
+function pageSearch() {
+  handleStardust();
+  handleScrollUpTop('scroll-to-top');
+  handleBackDirection();
+  handleModalFormAuth();
+};
 
-    $(topSearch + scrollRight).click(function() {
-        if(rightCount) {
-          $(topSearch + actionScroll).css(transCss , transCss100);
-        } else if (rightCount === 23) {
-          $(topSearch + actionScroll).css(transCss , transCss200);
-        }
-
-        $(topSearch + scrollRight).css(visibilityCss , hiddenCss);
-        $(topSearch + scrollLeft).css(visibilityCss , visibleCss);
-    });
-  }
-});
-/*
-* END: Click scroll
-*/
-
-//  ratingReportMenu = '.shop-product-rating__report-menu';
-//  tabReport = '.stardust-dropdown__item-body';
-
-//  if (ratingReportMenu) {
-//   $(ratingReportMenu).click(function() {
-//     $(tabReport).addClass('stardust-dropdown__item-body--open');
-//     $(tabReport).css('opacity', '1');
-//   });
-//  } else if (!ratingReportMenu) {
-//    $('.grid').click(function() {
-//      $(tabReport).removeClass('stardust-dropdown__item-body--open');
-//      $(tabReport).css('opacity', '0');
-//    });
-//  }
+function pageTopProduct() {
+  handleScrollUpTop('scroll-to-top');
+  handleBackDirection();
+  handleStardust();
+  handleModalFormAuth();
+}

@@ -14,9 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap&subset=vietnamese" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="./assets/img/page_icon/icons8-shopee.png">
 </head>
-<body>
-  <svg class="scroll-to-top l-0" xmlns="http://www.w3.org/2000/svg" width="44" height="44" version="1" onclick="upToTop()" id="scroll-to-top" style="display: none;">
+<body class="js-function">
+  <svg class="scroll-to-top l-0" xmlns="http://www.w3.org/2000/svg" width="44" height="44" version="1" id="scroll-to-top" style="display: none;">
     <defs><circle id="scroll-to-top-b" cx="22" cy="21" r="20"></circle><filter id="scroll-to-top-a" width="118%" height="118%" x="-9%" y="-6%" filterUnits="objectBoundingBox"><feOffset dy="1" in="SourceAlpha" result="f"></feOffset><feGaussianBlur in="f" result="f" stdDeviation="1"></feGaussianBlur><feComposite in="f" in2="SourceAlpha" operator="out" result="f"></feComposite><feColorMatrix in="f" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"></feColorMatrix></filter></defs><g fill="none" fill-rule="evenodd"><use fill="#000" filter="url(#scroll-to-top-a)" xlink:href="#b"></use><use fill="#fff" xlink:href="#scroll-to-top-b"></use><circle cx="22" cy="21" r="20"></circle><path fill="#EE4D2D" d="M12 13h20v2H12zm11 7v13h-2V20l-6 6-1-2 8-8 9 8-2 2z"></path></g>
   </svg>
   <div class="main">
@@ -61,18 +62,18 @@
                 Thông báo
               </a>
               <!-- Navbar User Login view notify-->
-              <!-- <div class="navbar-notify-user">
+              <div class="navbar-notify-user">
                 <div class="navbar-notify-user__container">
                   <div class="navbar-notify-user__section">
                     <img src="./assets/img/user/user_login.png " alt="User login" class="navbar-notify-user__section-img">
                     <div class="navbar-notify-user__section-title">Đăng nhập để xem Thông báo</div>
                   </div>
                   <div class="navbar-notify-user__footer">
-                    <a href="#" class="navbar-notify-user__footer-btn">Đăng ký</a>
-                    <a href="#" class="navbar-notify-user__footer-btn">Đăng nhập</a>
+                    <a href="#" class="navbar-notify-user__footer-btn stardust-btn--active" data-stardust="modal">Đăng ký</a>
+                    <a href="#" class="navbar-notify-user__footer-btn stardust-btn--active" data-stardust="modal">Đăng nhập</a>
                   </div>
                 </div>
-              </div> -->
+              </div>
               <!-- Navbar Notification -->
               <div class="navbar__notify">
                 <header class="navbar__notify-header">
@@ -160,8 +161,8 @@
                 </div>
               </div>
             </li>
-            <!-- <li class="navbar__list-item navbar__list-item--strong navbar__list-item--separate">Đăng ký</li>
-            <li class="navbar__list-item navbar__list-item--strong">Đăng nhập</li> -->
+            <li class="navbar__list-item navbar__list-item--strong navbar__list-item--separate stardust-btn--active" data-stardust="modal">Đăng ký</li>
+            <li class="navbar__list-item navbar__list-item--strong stardust-btn--active" data-stardust="modal">Đăng nhập</li>
             <li class="navbar__list-item navbar__list-item--strong navbar__list-item--has-hovered">
               <div class="navbar__list-user v-center">
                 <div class="navbar__list-user-img">
@@ -199,7 +200,7 @@
           <div class="header__search">
             <div class="header__search-container">
               <div class="header__search-wrap">
-                <input type="text" name="" id="header__search-input" class="header__search-input header__search-input--home" placeholder="Tìm kiếm sản phẩm">
+                <input type="text" name="" id="header-search-input" class="header__search-input header__search-input--home" placeholder="Tìm kiếm sản phẩm">
                 <div class="header__search-history" id="home-page-header-search-history">
                   <h3 class="header__search-history-heading v-center">Lịch sử tìm kiếm</h3>
                   <ul class="header__search-history-list">
@@ -225,7 +226,7 @@
               </div>
             </div>
           </div>
-          <div class="header__cart">
+          <div class="header__cart stardust-btn--active" data-stardust="modal">
             <div class="header__cart-wrap navbar__list-item--has-hovered">
               <a href="#" class="header__cart-link flex">
                 <svg viewBox="0 0 26.6 25.6" class="header__cart-icon header__cart-icon-link icon-shopping-cart-2"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle>
@@ -233,7 +234,7 @@
                 <span class="header__cart-notice">6</span>
               </a>
               <!-- Header Cart -->
-              <div class="header__cart-container">
+              <div class="header__cart-container header__cart-container--no-cart">
                 <div class="header__cart-container-no-cart-img">
                   <div class="header__cart-container-no-cart--img"></div>
                 </div>
@@ -360,7 +361,7 @@
                 </div>
               </div>
             </div>
-            <div class="header__user-mobile">
+            <div class="header__user-mobile stardust-btn--active" data-stardust="modal">
               <a href="#" class="header__user-mobile-link">
                 <i class="shop-icon fa-regular fa-user"></i>
               </a>
@@ -380,88 +381,89 @@
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/1.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/1.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/2.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/2.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/3.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/3.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/4.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/4.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/5.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/5.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/6.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/6.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/7.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/7.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/8.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/8.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/9.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/9.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/10.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/10.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/11.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/11.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                   <li class="head-slider-list__item">
                     <div class="head-slider-list__item-container">
                       <a href="#" class="head-slider__item-link">
-                        <img src="./assets/img/slider_head/12.png" class="head-slider__item-img"></img>
+                        <img src="./assets/img/slider_head/12.png" class="head-slider__item-img slider-img-1"></img>
                       </a>
                     </div>
                   </li>
                 </ul>
+                <div class="slider-actions"></div>
               </div>
             </div>
             <div class="home-banner__right-container">
@@ -1633,35 +1635,36 @@
                       <ul class="slider-img">
                         <li class="head-slider-list__item">
                           <a href="#" class="head-slider__item-link">
-                            <div class="head-slider__item-img--shopmall" style="background-image: url('./assets/img/shop_mall/slider_shopmall/1.png'); background-size: cover; background-repeat: no-repeat;"></div>
+                            <div class="head-slider__item-img--shopmall slider-img-2" style="background-image: url('./assets/img/shop_mall/slider_shopmall/1.png'); background-size: cover; background-repeat: no-repeat;"></div>
                           </a>
                         </li>
                         <li class="head-slider-list__item">
                           <a href="#" class="head-slider__item-link">
-                            <div class="head-slider__item-img--shopmall" style="background-image: url('./assets/img/shop_mall/slider_shopmall/2.png'); background-size: cover; background-repeat: no-repeat;"></div>
+                            <div class="head-slider__item-img--shopmall slider-img-2" style="background-image: url('./assets/img/shop_mall/slider_shopmall/2.png'); background-size: cover; background-repeat: no-repeat;"></div>
                           </a>
                         </li>
                         <li class="head-slider-list__item">
                           <a href="#" class="head-slider__item-link">
-                            <div class="head-slider__item-img--shopmall" style="background-image: url('./assets/img/shop_mall/slider_shopmall/3.png'); background-size: cover; background-repeat: no-repeat;"></div>
+                            <div class="head-slider__item-img--shopmall slider-img-2" style="background-image: url('./assets/img/shop_mall/slider_shopmall/3.png'); background-size: cover; background-repeat: no-repeat;"></div>
                           </a>
                         </li>
                         <li class="head-slider-list__item">
                           <a href="#" class="head-slider__item-link">
-                            <div class="head-slider__item-img--shopmall" style="background-image: url('./assets/img/shop_mall/slider_shopmall/4.png'); background-size: cover; background-repeat: no-repeat;"></div>
+                            <div class="head-slider__item-img--shopmall slider-img-2" style="background-image: url('./assets/img/shop_mall/slider_shopmall/4.png'); background-size: cover; background-repeat: no-repeat;"></div>
                           </a>
                         </li>
                         <li class="head-slider-list__item">
                           <a href="#" class="head-slider__item-link">
-                            <div class="head-slider__item-img--shopmall" style="background-image: url('./assets/img/shop_mall/slider_shopmall/5.png'); background-size: cover; background-repeat: no-repeat;"></div>
+                            <div class="head-slider__item-img--shopmall slider-img-2" style="background-image: url('./assets/img/shop_mall/slider_shopmall/5.png'); background-size: cover; background-repeat: no-repeat;"></div>
                           </a>
                         </li>
                         <li class="head-slider-list__item">
                           <a href="#" class="head-slider__item-link">
-                            <div class="head-slider__item-img--shopmall" style="background-image: url('./assets/img/shop_mall/slider_shopmall/6.png'); background-size: cover; background-repeat: no-repeat;"></div>
+                            <div class="head-slider__item-img--shopmall slider-img-2" style="background-image: url('./assets/img/shop_mall/slider_shopmall/6.png'); background-size: cover; background-repeat: no-repeat;"></div>
                           </a>
                         </li>
                       </ul>
+                      <div class="slider-actions"></div>
                     </div>
                   </div>
                   <div class="shop-section__content">
@@ -4725,15 +4728,15 @@
     </footer>
   </div>
   <!-- Begin: Modal layout -->
-  <!-- <div class="modal">
-    <div class="modal__overlay"></div>
-    <div class="modal__container"> -->
+  <div class="js-overlay"></div>
+  <div class="modal stardust-modal__container">
+    <div class="modal__container">
       <!-- Register form -->
-      <!-- <div class="auth-form">
+      <div class="auth-form auth-form__register">
         <div class="auth-form__container">
           <div class="auth-form__header">
             <h3 class="auth-form__title">Đăng ký</h3>
-            <span class="auth-form__switch-btn">Đăng nhập</span>
+            <span class="auth-form__switch-btn" data-form="login">Đăng nhập</span>
           </div>
           <div class="auth-form__sections">
             <div class="auth-form__group">
@@ -4771,14 +4774,14 @@
             <span class="btn--social-text btn--text-s-m">Kết nối với Google</span>
           </a>
         </div>
-      </div> -->
+      </div>
 
       <!-- Login form -->
-      <!-- <div class="auth-form">
+      <div class="auth-form auth-form__login auth-form--active">
         <div class="auth-form__container">
           <div class="auth-form__header">
             <h3 class="auth-form__title">Đăng nhập</h3>
-            <span class="auth-form__switch-btn">Đăng ký</span>
+            <span class="auth-form__switch-btn" data-form="register">Đăng ký</span>
           </div>
           <div class="auth-form__sections">
             <div class="auth-form__group">
@@ -4820,9 +4823,11 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
   <!-- END: Modal layout -->
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="./assets/js/extended.js"></script>
+<script>
+  main();
+</script>
+</body>
 </html>

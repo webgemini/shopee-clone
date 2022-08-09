@@ -14,9 +14,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap&subset=vietnamese" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../../assets/img/page_icon/icons8-shopee.png">
 </head>
-<body>
-  <svg class="scroll-to-top l-0 scroll-to-top--page" xmlns="http://www.w3.org/2000/svg" width="44" height="44" version="1" onclick="upToTop()" id="scroll-to-top" style="display: none;">
+<body class="js-function">
+  <svg class="scroll-to-top l-0 scroll-to-top--page" xmlns="http://www.w3.org/2000/svg" width="44" height="44" version="1" id="scroll-to-top" style="display: none;">
     <defs><circle id="scroll-to-top-b" cx="22" cy="21" r="20"></circle><filter id="scroll-to-top-a" width="118%" height="118%" x="-9%" y="-6%" filterUnits="objectBoundingBox"><feOffset dy="1" in="SourceAlpha" result="f"></feOffset><feGaussianBlur in="f" result="f" stdDeviation="1"></feGaussianBlur><feComposite in="f" in2="SourceAlpha" operator="out" result="f"></feComposite><feColorMatrix in="f" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"></feColorMatrix></filter></defs><g fill="none" fill-rule="evenodd"><use fill="#000" filter="url(#scroll-to-top-a)" xlink:href="#b"></use><use fill="#fff" xlink:href="#scroll-to-top-b"></use><circle cx="22" cy="21" r="20"></circle><path fill="#EE4D2D" d="M12 13h20v2H12zm11 7v13h-2V20l-6 6-1-2 8-8 9 8-2 2z"></path></g>
   </svg>
   <div class="main">
@@ -61,20 +62,20 @@
                 Thông báo
               </a>
               <!-- Navbar User Login view notify-->
-              <!-- <div class="navbar-notify-user">
+              <div class="navbar-notify-user">
                 <div class="navbar-notify-user__container">
                   <div class="navbar-notify-user__section">
-                    <img src="./assets/img/user/user_login.png " alt="User login" class="navbar-notify-user__section-img">
+                    <img src="../../assets/img/user/user_login.png " alt="User login" class="navbar-notify-user__section-img">
                     <div class="navbar-notify-user__section-title">Đăng nhập để xem Thông báo</div>
                   </div>
                   <div class="navbar-notify-user__footer">
-                    <a href="#" class="navbar-notify-user__footer-btn">Đăng ký</a>
-                    <a href="#" class="navbar-notify-user__footer-btn">Đăng nhập</a>
+                    <a href="#" class="navbar-notify-user__footer-btn stardust-btn--active" data-stardust="modal">Đăng ký</a>
+                    <a href="#" class="navbar-notify-user__footer-btn stardust-btn--active" data-stardust="modal">Đăng nhập</a>
                   </div>
                 </div>
-              </div> -->
+              </div>
               <!-- Navbar Notification -->
-              <div class="navbar__notify">
+              <!-- <div class="navbar__notify">
                 <header class="navbar__notify-header">
                   <h3>Thông Báo Mới Nhận</h3>
                 </header>
@@ -137,7 +138,7 @@
                 <footer class="navbar__notify-footer">
                   <a href="#" class="navbar__notify-footer-btn">Xem tất cả</a>
                 </footer>
-              </div>
+              </div> -->
             </li>
             <li class="navbar__list-item">
               <a href="#" class="navbar__list-item-link">
@@ -160,8 +161,8 @@
                 </div>
               </div>
             </li>
-            <!-- <li class="navbar__list-item navbar__list-item--strong navbar__list-item--separate">Đăng ký</li>
-            <li class="navbar__list-item navbar__list-item--strong">Đăng nhập</li> -->
+            <li class="navbar__list-item navbar__list-item--strong navbar__list-item--separate stardust-btn--active" data-stardust="modal">Đăng ký</li>
+            <li class="navbar__list-item navbar__list-item--strong stardust-btn--active" data-stardust="modal">Đăng nhập</li>
             <li class="navbar__list-item navbar__list-item--strong navbar__list-item--has-hovered">
               <div class="navbar__list-user v-center">
                 <div class="navbar__list-user-img">
@@ -188,7 +189,7 @@
         </nav>
         <div class="header-w-s">
           <div class="header-back l-0">
-            <a href="../../index.html" class="header-back-link">
+            <a class="header-back-link">
               <i class="shop-icon shop-icon--back fa-solid fa-arrow-left"></i>
             </a>
           </div>
@@ -204,7 +205,7 @@
           <div class="header__search">
             <div class="header__search-container">
               <div class="header__search-wrap">
-                <input type="text" name="" id="" class="header__search-input" placeholder="Tìm kiếm sản phẩm trong Shop">
+                <input type="text" name="" id="header-search-input" class="header__search-input" placeholder="Tìm kiếm sản phẩm trong Shop">
                 <div class="header__search-history">
                   <h3 class="header__search-history-heading v-center">Lịch sử tìm kiếm</h3>
                   <ul class="header__search-history-list">
@@ -230,7 +231,7 @@
               </div>
             </div>
           </div>
-          <div class="header__cart header__cart--page c-0">
+          <div class="header__cart header__cart--page c-0 stardust-btn--active" data-stardust="modal">
             <div class="header__cart-wrap navbar__list-item--has-hovered">
               <a href="#" class="header__cart-link flex">
                 <svg viewBox="0 0 26.6 25.6" class="header__cart-icon header__cart-icon-link icon-shopping-cart-2"><polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline><circle cx="10.7" cy="23" r="2.2" stroke="none"></circle><circle cx="19.7" cy="23" r="2.2" stroke="none"></circle>
@@ -238,7 +239,7 @@
                 <span class="header__cart-notice">6</span>
               </a>
               <!-- Header Cart -->
-              <div class="header__cart-container ">
+              <div class="header__cart-container header__cart-container--no-cart">
                 <div class="header__cart-container-no-cart-img">
                   <div class="header__cart-container-no-cart--img"></div>
                 </div>
@@ -1814,105 +1815,107 @@
         </a>
       </div>
     </nav>
-<!-- Begin: Modal layout -->
-<!-- <div class="modal">
-<div class="modal__overlay"></div>
-<div class="modal__container"> -->
-  <!-- Register form -->
-  <!-- <div class="auth-form">
-    <div class="auth-form__container">
-      <div class="auth-form__header">
-        <h3 class="auth-form__title">Đăng ký</h3>
-        <span class="auth-form__switch-btn">Đăng nhập</span>
-      </div>
-      <div class="auth-form__sections">
-        <div class="auth-form__group">
-          <input type="text" class="auth-form__input" placeholder="Nhập email">
+  <!-- Begin: Modal layout -->
+  <div class="js-overlay"></div>
+  <div class="modal stardust-modal__container">
+    <div class="modal__container">
+      <!-- Register form -->
+      <div class="auth-form auth-form__register">
+        <div class="auth-form__container">
+          <div class="auth-form__header">
+            <h3 class="auth-form__title">Đăng ký</h3>
+            <span class="auth-form__switch-btn" data-form="login">Đăng nhập</span>
+          </div>
+          <div class="auth-form__sections">
+            <div class="auth-form__group">
+              <input type="text" class="auth-form__input" placeholder="Nhập email">
+            </div>
+            <div class="auth-form__group">
+              <input type="password" class="auth-form__input" placeholder="Nhập password">
+            </div>
+            <div class="auth-form__group">
+              <input type="password" class="auth-form__input" placeholder="Nhập lại password">
+            </div>
+          </div>
+          <div class="auth-form__aside">
+            <span class="auth-form__policy-text">Bằng việc đăng kí, bạn đã đồng ý với Shop về
+              <a href="#" class="auth-form__text-link">Điều khoản dịch vụ</a> & <a href="#" class="auth-form__text-link">Chính sách bảo mật</a>
+            </span>
+          </div>
+          <div class="auth-form__controls">
+            <button class="btn btn--m auth-form__control--back btn--has-hovered">Trở lại</button>
+            <button class="btn btn--m btn--primary">Đăng ký</button>
+          </div>
+          <div class="prevent">
+            <div class="prevent-line"></div>
+            <span class="prevent-text">HOẶC</span>
+            <div class="prevent-line"></div>
+          </div>
         </div>
-        <div class="auth-form__group">
-          <input type="password" class="auth-form__input" placeholder="Nhập password">
+        <div class="auth-form__socials">
+          <a class="btn btn--s btn--social-icon--facebook">
+            <i class="fa-brands fa-facebook-square social-icon"></i>
+            <span class="btn--social-text btn--text-s-m">Kết nối với Facebook</span>
+          </a>
+          <a class="btn btn--s btn--social-icon--google">
+            <i class="fa-brands fa-google social-icon"></i>
+            <span class="btn--social-text btn--text-s-m">Kết nối với Google</span>
+          </a>
         </div>
-        <div class="auth-form__group">
-          <input type="password" class="auth-form__input" placeholder="Nhập lại password">
-        </div>
       </div>
-      <div class="auth-form__aside">
-        <span class="auth-form__policy-text">Bằng việc đăng kí, bạn đã đồng ý với Shop về
-          <a href="#" class="auth-form__text-link">Điều khoản dịch vụ</a> & <a href="#" class="auth-form__text-link">Chính sách bảo mật</a>
-        </span>
-      </div>
-      <div class="auth-form__controls">
-        <button class="btn btn--m auth-form__control--back btn--has-hovered">Trở lại</button>
-        <button class="btn btn--m btn--primary">Đăng ký</button>
-      </div>
-      <div class="prevent">
-        <div class="prevent-line"></div>
-        <span class="prevent-text">HOẶC</span>
-        <div class="prevent-line"></div>
-      </div>
-    </div>
-    <div class="auth-form__socials">
-      <a class="btn btn--s btn--social-icon--facebook">
-        <i class="fa-brands fa-facebook-square social-icon"></i>
-        <span class="btn--social-text btn--text-s-m">Kết nối với Facebook</span>
-      </a>
-      <a class="btn btn--s btn--social-icon--google">
-        <i class="fa-brands fa-google social-icon"></i>
-        <span class="btn--social-text btn--text-s-m">Kết nối với Google</span>
-      </a>
-    </div>
-  </div> -->
 
-  <!-- Login form -->
-  <!-- <div class="auth-form">
-    <div class="auth-form__container">
-      <div class="auth-form__header">
-        <h3 class="auth-form__title">Đăng nhập</h3>
-        <span class="auth-form__switch-btn">Đăng ký</span>
-      </div>
-      <div class="auth-form__sections">
-        <div class="auth-form__group">
-          <input type="text" class="auth-form__input" placeholder="Nhập email">
+      <!-- Login form -->
+      <div class="auth-form auth-form__login auth-form--active">
+        <div class="auth-form__container">
+          <div class="auth-form__header">
+            <h3 class="auth-form__title">Đăng nhập</h3>
+            <span class="auth-form__switch-btn" data-form="register">Đăng ký</span>
+          </div>
+          <div class="auth-form__sections">
+            <div class="auth-form__group">
+              <input type="text" class="auth-form__input" placeholder="Nhập email">
+            </div>
+            <div class="auth-form__group">
+              <input type="password" class="auth-form__input" placeholder="Nhập password">
+            </div>
+            <div class="auth-form__group">
+              <input type="password" class="auth-form__input" placeholder="Nhập lại password">
+            </div>
+          </div>
+          <div class="auth-form__aside">
+            <div class="auth-form__help">
+              <a href="#" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+              <span class="auth-form__help-separate"></span>
+              <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
+            </div>
+          </div>
+          <div class="auth-form__controls">
+            <button class="btn btn--m auth-form__control--back btn--has-hovered">Trở lại</button>
+            <button class="btn btn--m btn--primary">Đăng Nhập</button>
+          </div>
+          <div class="prevent">
+            <div class="prevent-line"></div>
+            <span class="prevent-text">HOẶC</span>
+            <div class="prevent-line"></div>
+          </div>
         </div>
-        <div class="auth-form__group">
-          <input type="password" class="auth-form__input" placeholder="Nhập password">
-        </div>
-        <div class="auth-form__group">
-          <input type="password" class="auth-form__input" placeholder="Nhập lại password">
-        </div>
-      </div>
-      <div class="auth-form__aside">
-        <div class="auth-form__help">
-          <a href="#" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
-          <span class="auth-form__help-separate"></span>
-          <a href="#" class="auth-form__help-link">Cần trợ giúp?</a>
+        <div class="auth-form__socials">
+          <a class="btn btn--s btn--social-icon--facebook">
+            <i class="fa-brands fa-facebook-square social-icon"></i>
+            <span class="btn--social-text">Đăng nhập với Facebook</span>
+          </a>
+          <a class="btn btn--s btn--social-icon--google">
+            <i class="fa-brands fa-google social-icon"></i>
+            <span class="btn--social-text">Đăng nhập với Google</span>
+          </a>
         </div>
       </div>
-      <div class="auth-form__controls">
-        <button class="btn btn--m auth-form__control--back btn--has-hovered">Trở lại</button>
-        <button class="btn btn--m btn--primary">Đăng Nhập</button>
-      </div>
-      <div class="prevent">
-        <div class="prevent-line"></div>
-        <span class="prevent-text">HOẶC</span>
-        <div class="prevent-line"></div>
-      </div>
-    </div>
-    <div class="auth-form__socials">
-      <a class="btn btn--s btn--social-icon--facebook">
-        <i class="fa-brands fa-facebook-square social-icon"></i>
-        <span class="btn--social-text">Đăng nhập với Facebook</span>
-      </a>
-      <a class="btn btn--s btn--social-icon--google">
-        <i class="fa-brands fa-google social-icon"></i>
-        <span class="btn--social-text">Đăng nhập với Google</span>
-      </a>
     </div>
   </div>
-</div>
-</div> -->
-<!-- END: Modal layout -->
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- END: Modal layout -->
 <script src="../../assets/js/extended.js"></script>
+<script>
+  pageTopProduct();
+</script>
+</body>
 </html>

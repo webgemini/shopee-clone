@@ -88,16 +88,15 @@
     z-index: 81;
     display: none;
   }
-  .stardust-popover__container--show {
+  .stardust-popover__container--active {
     display: block;
   }
-  .stardust-drawer__background.stardust-popover__background--active {
-    display: block;
-    z-index: 2;
+  .stardust-popover__overlay {
     animation: fadeIn ease-out 0.1s;
     -webkit-animation: fadeIn ease-out 0.1s;
     -moz-animation: fadeIn ease-out 0.1s;
     -o-animation: fadeIn ease-out 0.1s;
+    z-index: 79;
   }
   .shop-menu {
     width: 16rem;
@@ -132,7 +131,12 @@
     color: rgba(0, 0, 0, 0.87);
   }
   /* Stardust Drawer Filter */
-  .stardust-drawer__background {
+  .stardust-drawer {
+    width: 100%;
+    height: 100%;
+  }
+  .stardust-drawer__overlay,
+  .stardust-popover__overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -140,10 +144,6 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     display: none;
-  }
-  .stardust-drawer__background--active {
-    display: block;
-    z-index: 8888;
   }
   .stardust-drawer__container {
     position: fixed;
@@ -153,7 +153,7 @@
     height: 100%;
     background: var(--c-white);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.6, 1);
-    z-index: 8889;
+    z-index: 191;
   }
   .stardust-drawer__container--active {
     transform: translateX(-100%);
@@ -737,6 +737,32 @@
 
   .scroll-to-top--page {
     bottom: 5.8rem;
+  }
+  .auth-form {
+    width: 100%;
+  }
+  .auth-form__container {
+    padding: 0 1.2rem;
+  }
+  .auth-form__header {
+    margin: 1rem 0;
+    height: 3.6rem;
+  }
+  .auth-form__help {
+    justify-content: center;
+  }
+  .auth-form__controls {
+    margin-top: 4rem;
+    justify-content: center;
+  }
+  .auth-form__control--back {
+    border: 1px solid rgba(0, 0, 0, 0.09);
+  }
+  .auth-form__socials {
+    padding: 1rem;
+  }
+  .btn--social-text {
+    margin: 0 0.5rem;
   }
 
   /* Header */
@@ -1415,6 +1441,9 @@
   .product-brief__return-link {
     width: 100%;
   }
+  .notice-quantity-up-and-down {
+    margin: 1.5rem 0 0 0;
+  }
   .page-product .product-brief__btn {
     display: flex;
     position: fixed;
@@ -1600,6 +1629,9 @@
     width: 100%;
     margin-bottom: 2rem;
     justify-content: center;
+  }
+  .footer--product {
+    margin-bottom: 4.8rem;
   }
   /* END: Page Product */
 
