@@ -152,6 +152,19 @@ function handleScrollUpTop(scrollToTop) {
   }
 }
 
+function handleSearchScroll() {
+  if (window.innerWidth < 1024) {
+    var searchScrollHideDown = document.getElementById('home-page-header-search-history');
+    window.onscroll = () => {
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        searchScrollHideDown.style.display = 'none';
+      } else {
+        searchScrollHideDown.style.display = 'block';
+      }
+    };
+  }
+}
+
 function handleProductQuantity(btnActionUpDown, calculatorProductQuantity) {
   var btnUpDownValue = document.querySelectorAll(btnActionUpDown);
   var resultInput = document.querySelector(calculatorProductQuantity);
@@ -331,6 +344,7 @@ function main() {
   slideShowMain.run();
   slideShowMain2.run();
   handleScrollUpTop('scroll-to-top');
+  handleSearchScroll();
   handleModalFormAuth();
   handleStardust();
 
