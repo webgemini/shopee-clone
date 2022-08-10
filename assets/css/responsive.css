@@ -11,12 +11,6 @@
   .cate-section .image-carousel__list--left {
     transform: translate(0rem, 0rem)
   }
-  .cate-section .image-carousel__list {
-    width: 130%;
-  }
-  .cate-section .image-carousel__item {
-    width: 10%;
-  }
 
   .home-banner__list-container {
     overflow-x: hidden;
@@ -458,10 +452,9 @@
   .header__search-history {
     position: fixed;
     top: var(--header-h);
+    left: 0;
     width: 100%;
     font-size: 1.6rem;
-    z-index: -1;
-    scroll-margin-top: 50px;
   }
   .header__search-input:focus ~ .header__search-history {
     display: block;
@@ -687,9 +680,6 @@
   .cate-section .image-carousel__list {
     width: 216.9%;
   }
-  .cate-section .image-carousel__item {
-    width: 16.666667%;
-  }
 
   .trending-search-section__content-link {
     width: 33.333333%;
@@ -763,6 +753,9 @@
   }
   .btn--social-text {
     margin: 0 0.5rem;
+  }
+  .carousel-arrow {
+    display: none;
   }
 
   /* Header */
@@ -1003,7 +996,6 @@
     height: 100%;
   }
   .cate-section .image-carousel__item {
-    width: 25%;
     height: 100%;
   }
   .cate-section .image-carousel__item-link {
@@ -1015,22 +1007,12 @@
     height: 80%;
   }
 
-  .carousel-arrow {
-    display: none;
-  }
-
   .shop-section__heading-list {
     display: none;
   }
 
   .flash-sale-section {
     min-height: 100%;
-  }
-  .flash-sale-section .image-carousel__list {
-    width: 600%;
-  }
-  .flash-sale-section .image-carousel__item {
-    width: 33.3333%;
   }
   .flash-sale__item-link {
     margin: 0 0.4rem 0.4rem;
@@ -1080,13 +1062,6 @@
     zoom: 1;
     -ms-zoom: 1;
   }
-
-  .shop-mall-section .image-carousel__list {
-    width: 533.3333%;
-  }
-  .shop-mall-section .image-carousel__item {
-    width: 50%;
-  }
   .shop-mall-section .image-carousel__item-group {
     flex-direction: row;
   }
@@ -1116,11 +1091,7 @@
   }
 
   .top-search-section .image-carousel__list {
-    width: 700%;
     padding: 0 0.6rem 1rem;
-  }
-  .top-search-section .image-carousel__item {
-    width: 33.3333%;
   }
   .top-search-section .top-search__item-card {
     padding: 0 0.4rem;

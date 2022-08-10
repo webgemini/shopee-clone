@@ -474,14 +474,7 @@ div.slider-arrow:hover {
   background-color: var(--c-primary);
 }
 
-@media screen and (min-width: 768px) {
-  .slider-dot li {
-    /* font-size: 0.9rem; */
-  }
-}
-
 /* Carousel arrow */
-
 .carousel-arrow {
   position: absolute;
   display: flex;
@@ -503,14 +496,17 @@ div.slider-arrow:hover {
   outline: 0;
 }
 
-
 .carousel-arrow__left {
   left: 0;
-  visibility: hidden;
 }
-
 .carousel-arrow__right {
   right: 0;
+}
+.carousel-arrow__left--hidden {
+  display: none;
+}
+.carousel-arrow__right--hidden {
+  display: none;
 }
 
 .image-carousel:hover .carousel-arrow {

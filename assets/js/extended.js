@@ -198,6 +198,55 @@ function handleProductQuantity(btnActionUpDown, calculatorProductQuantity) {
   }
 }
 
+function handleCarouselActions(carouselParentObj, a, b) {
+  this.carouselParent = document.querySelector(carouselParentObj);
+  this.carouselList = this.carouselParent.querySelector('.image-carousel__list');
+  this.carouselListItems = this.carouselParent.querySelectorAll('.image-carousel__item');
+  this.carouselPrev = this.carouselParent.querySelector('.carousel-arrow__left');
+  this.carouselNext = this.carouselParent.querySelector('.carousel-arrow__right');
+  this.listItemsCount = Math.round(this.carouselListItems.length / a);
+  this.currentIndex = 0;
+
+  this.handleAddStyleCarousel = (c, d) => {
+    this.carouselList.style.width = c;
+    this.carouselListItems.forEach((carouselListItem) => {
+      carouselListItem.style.width = d;
+    });
+  }
+
+  this.handleCarousel = () => {
+    this.carouselList.style.transform = `translate(${-this.currentIndex * (this.carouselListItems[this.currentIndex].offsetWidth * b)}px, 0px)`;
+    if (this.currentIndex >= this.listItemsCount) {
+      this.carouselNext.classList.add('carousel-arrow__right--hidden');
+    }
+    if (this.currentIndex <= 0) {
+      this.carouselPrev.classList.add('carousel-arrow__left--hidden');
+    }
+  }
+
+  this.carouselPrev.classList.add('carousel-arrow__left--hidden');
+
+  this.next = () => {
+    this.currentIndex >= this.listItemsCount ? (this.currentIndex = this.listItemsCount) : this.currentIndex++;
+    this.handleCarousel();
+    this.carouselPrev.classList.remove('carousel-arrow__left--hidden');
+  }
+  this.prev = () => {
+    this.currentIndex <= 0 ? (this.currentIndex = 0) : this.currentIndex--;
+    this.handleCarousel();
+    this.carouselNext.classList.remove('carousel-arrow__right--hidden');
+  }
+
+  this.run = () => {
+    if (this.carouselNext) {
+      this.carouselNext.onclick = this.next;
+    }
+    if (this.carouselPrev) {
+      this.carouselPrev.onclick = this.prev;
+    }
+  }
+}
+
 function handleSlideShow(nameSlideShow, imgId, autoPlay) {
   this.currentIndex = 0;
   this.sliderShowEle = document.querySelector(nameSlideShow);
@@ -284,6 +333,56 @@ function main() {
   handleScrollUpTop('scroll-to-top');
   handleModalFormAuth();
   handleStardust();
+
+  if (window.innerWidth > 1023) {
+    const carouselCateObj = new handleCarouselActions('.cate-section', 13, 3);
+    carouselCateObj.handleAddStyleCarousel('130%', '10%');
+    carouselCateObj.run();
+
+    const carouselFlashObj = new handleCarouselActions('.flash-sale-section', 8, 5);
+    carouselFlashObj.handleAddStyleCarousel('266.667%', '16.667%');
+    carouselFlashObj.run();
+
+    const carouselShopMallObj = new handleCarouselActions('.shop-mall-section', 8, 4);
+    carouselShopMallObj.handleAddStyleCarousel('200%', '25%');
+    carouselShopMallObj.run();
+
+    const carouselTopSearchObj = new handleCarouselActions('.top-search-section', 8, 5);
+    carouselTopSearchObj.handleAddStyleCarousel('350.333%', '16.667%');
+    carouselTopSearchObj.run();
+  } else if (window.innerWidth > 739 && window.innerWidth < 1024 ) {
+    const carouselCateObj = new handleCarouselActions('.cate-section', 6, 3.5);
+    carouselCateObj.handleAddStyleCarousel('216.667%', '16.667%');
+    carouselCateObj.run();
+
+    const carouselFlashObj = new handleCarouselActions('.flash-sale-section', 4, 3);
+    carouselFlashObj.handleAddStyleCarousel('400%', '16.667%');
+    carouselFlashObj.run();
+
+    const carouselShopMallObj = new handleCarouselActions('.shop-mall-section', 8, 4);
+    carouselShopMallObj.handleAddStyleCarousel('200%', '25%');
+    carouselShopMallObj.run();
+
+    const carouselTopSearchObj = new handleCarouselActions('.top-search-section', 5, 4);
+    carouselTopSearchObj.handleAddStyleCarousel('421%', '20%');
+    carouselTopSearchObj.run();
+  } else if (window.innerWidth < 740) {
+    const carouselCateObj = new handleCarouselActions('.cate-section', 6, 3.5);
+    carouselCateObj.handleAddStyleCarousel('210%', '12%');
+    carouselCateObj.run();
+
+    const carouselFlashObj = new handleCarouselActions('.flash-sale-section', 4, 3);
+    carouselFlashObj.handleAddStyleCarousel('390%', '20%');
+    carouselFlashObj.run();
+
+    const carouselShopMallObj = new handleCarouselActions('.shop-mall-section', 8, 4);
+    carouselShopMallObj.handleAddStyleCarousel('400%', '25%');
+    carouselShopMallObj.run();
+
+    const carouselTopSearchObj = new handleCarouselActions('.top-search-section', 8, 5);
+    carouselTopSearchObj.handleAddStyleCarousel('660%', '20%');
+    carouselTopSearchObj.run();
+  }
 };
 
 function pageCateProduct() {
@@ -293,6 +392,20 @@ function pageCateProduct() {
   handleScrollUpTop('scroll-to-top');
   handleBackDirection();
   handleModalFormAuth();
+
+  if (window.innerWidth > 1023) {
+    const carouselPageCateObj = new handleCarouselActions('.shop-mall-section--cate-product', 12, 4);
+    carouselPageCateObj.handleAddStyleCarousel('150%', '10%');
+    carouselPageCateObj.run();
+  } else if (window.innerWidth > 739 && window.innerWidth < 1024 ) {
+    const carouselPageCateObj = new handleCarouselActions('.shop-mall-section--cate-product', 12, 6);
+    carouselPageCateObj.handleAddStyleCarousel('200%', '15%');
+    carouselPageCateObj.run();
+  } else if (window.innerWidth < 740) {
+    const carouselPageCateObj = new handleCarouselActions('.shop-mall-section--cate-product', 3, 3);
+    carouselPageCateObj.handleAddStyleCarousel('600%', '20%');
+    carouselPageCateObj.run();
+  }
 };
 
 function pageProduct() {
