@@ -154,14 +154,28 @@ function handleScrollUpTop(scrollToTop) {
 
 function handleSearchScroll() {
   if (window.innerWidth < 1024) {
-    var searchScrollHideDown = document.getElementById('home-page-header-search-history');
-    window.onscroll = () => {
-      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        searchScrollHideDown.style.display = 'none';
-      } else {
-        searchScrollHideDown.style.display = 'block';
-      }
-    };
+    var searchInputEle = document.querySelector('.header__search-input');
+    var overlayEle = document.querySelector('.js-overlay');
+    if (searchInputEle) {
+      searchInputEle.addEventListener('click', () => {
+        searchInputEle.classList.add('header__search-input--orange');
+        overlayEle.classList.add('js-overlay--active');
+      });
+    }
+    if (overlayEle) {
+      overlayEle.addEventListener('click', () => {
+        searchInputEle.classList.remove('header__search-input--orange');
+        overlayEle.classList.remove('js-overlay--active');
+      });
+    }
+    if (searchInputEle) {
+      window.onscroll = () => {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+          searchInputEle.classList.remove('header__search-input--orange');
+          overlayEle.classList.remove('js-overlay--active');
+        }
+      };
+    }
   }
 }
 

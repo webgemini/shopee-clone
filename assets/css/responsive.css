@@ -456,7 +456,7 @@
     width: 100%;
     font-size: 1.6rem;
   }
-  .header__search-input:focus ~ .header__search-history {
+  .header__search-input--orange:focus ~ .header__search-history {
     display: block;
     animation: showSearchSideIn ease-out 0.2s;
     -o-animation: showSearchSideIn ease-out 0.2s;
