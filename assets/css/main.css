@@ -1191,7 +1191,7 @@
   font-weight: 400;
   color: var(--c-text);
   text-align: center;
-  margin-bottom: 0.8rem;
+  margin: 0 1rem 0.8rem;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -2558,6 +2558,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   height: 2.8rem;
   margin-top: 0.5rem;
 }
@@ -2566,8 +2567,10 @@
 .product-container-item__price-num {
   display: flex;
   align-items: center;
-  flex: 1 0 auto;
   height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-container-item__price-old {
@@ -3966,7 +3969,7 @@ i.product-container-item__like-icon--fill {
 
 .product-brief__info {
   display: flex;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 }
 
 .product-brief__info-section {
@@ -4199,6 +4202,7 @@ i.product-container-item__like-icon--fill {
 
 
 .product-brief__info-price-total {
+  width: 100%;
   padding: 1.5rem 2rem;
   background: #FAFAFA;
   border-radius: 0.1rem;
@@ -4206,7 +4210,7 @@ i.product-container-item__like-icon--fill {
 
 .product-brief__info-price {
   flex-wrap: wrap;
-  width: 62.5rem;
+  width: 100%;
   min-height: 3rem;
 }
 
